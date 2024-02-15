@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player</title>
+</head>
+
+<body bgcolor="black">
+    <h1 style="color: white; font-weight: bold; text-align: center; font-family: sans-serif;">PR NEWS 24x7 LIVESTREAM
+    </h1>
+    <video id="videoPlayer" controls autoplay fullscreen
+        style="width: auto; height: auto; display: block; margin: 0 auto; border-radius: 25px;">
+        <source src="/video" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        // Function to reload the video source
+        function reloadVideo() {
+            var video = document.getElementById('videoPlayer');
+            video.src = "/video?" + new Date().getTime(); // Append a timestamp to the URL to prevent caching
+            video.load(); // Reload the video
+            video.play(); // Start playing the video again
+        }
+
+        // Listen for the 'ended' event of the video element and reload the video when it ends
+        document.getElementById('videoPlayer').addEventListener('ended', function () {
+            reloadVideo();
+        });
+    </script>
+</body>
+
+</html>
