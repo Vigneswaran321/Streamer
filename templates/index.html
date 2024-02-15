@@ -5,16 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Player</title>
+    <style>
+        /* Ensures the video player is responsive and maintains aspect ratio */
+        #videoPlayer {
+            width: 100%; /* Makes the video width responsive */
+            max-width: 640px; /* Adjust this value based on your preference */
+            height: auto; /* Maintains aspect ratio */
+            display: block; /* Center the video in the container */
+            margin: 0 auto; /* Centers the video horizontally */
+            border-radius: 25px; /* Rounded corners */
+        }
+    </style>    
 </head>
 
 <body bgcolor="black">
     <h1 style="color: white; font-weight: bold; text-align: center; font-family: sans-serif;">PR NEWS 24x7 LIVESTREAM
     </h1>
-    <video id="videoPlayer" controls autoplay fullscreen
-        style="width: auto; height: auto; display: block; margin: 0 auto; border-radius: 25px;">
+    <video id="videoPlayer" controls autoplay style="max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 25px;">
         <source src="/video" type="video/mp4">
         Your browser does not support the video tag.
-    </video>
+    </video>    
 
     <script>
         // Function to reload the video source
