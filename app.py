@@ -23,27 +23,27 @@ scheduler.start()
 latest_headline = {"text": "", "time": None}
 API_KEY = os.environ.get("API_SYNCLABS")  # Placeholder for your API key
 # List to store video URLs
-videos = ["https://synchlabs-public.s3.amazonaws.com/Data/job_90e70bb6-1b8e-44c7-bcef-d956a314d0b0/result_90e70bb6-1b8e-44c7-bcef-d956a314d0b0.mp4"]
+videos = ["https://synchlabs-public.s3.amazonaws.com/Data/job_90e70bb6-1b8e-44c7-bcef-d956a314d0b0/result_90e70bb6-1b8e-44c7-bcef-d956a314d0b0.mp4","https://z8ooz42jceh5qbt0.public.blob.vercel-storage.com/Intro-gXPFW04Gr7aLHXeyTyHTMLvb3fuiLE.MP4","https://synchlabs-public.s3.amazonaws.com/Data/job_4f118a86-ad08-4aab-9009-975bee36b35c/result_4f118a86-ad08-4aab-9009-975bee36b35c.mp4","https://synchlabs-public.s3.amazonaws.com/Data/job_2fecefa2-4b3a-4a8b-a6ae-086b34fbf3f8/result_2fecefa2-4b3a-4a8b-a6ae-086b34fbf3f8.mp4","https://synchlabs-public.s3.amazonaws.com/Data/job_7543ec0b-dd4d-41c8-abbd-afe1ff9d35ed/result_7543ec0b-dd4d-41c8-abbd-afe1ff9d35ed.mp4","https://synchlabs-public.s3.amazonaws.com/Data/job_4fd1fd84-2669-4f83-b441-5a94386dcc35/result_4fd1fd84-2669-4f83-b441-5a94386dcc35.mp4","https://synchlabs-public.s3.amazonaws.com/Data/job_949ba423-735f-40e0-9b4a-27992043953a/result_949ba423-735f-40e0-9b4a-27992043953a.mp4"]
 
 
 def scheduled_task():
     global latest_headline
     new_headline = get_latest_headline()
-    # if new_headline:
-    #     audio_response = generate_news_audio(new_headline)
-    #     print(f"Generated audio for headline: {new_headline}")
-    #     audio_response.write_to_file('static\output.mp3')
-    #     audio_url = "https://anker-xi.vercel.app/video/output.mp3"
-    #     video_url = "https://anker-xi.vercel.app/video/input.mp4"
-    #     id = request_video_processing(audio_url, video_url)
-    #     while True:
-    #         status_response = requests.get(f'https://api.synclabs.so/video/{id}', headers={'x-api-key': API_KEY})
-    #         status = status_response.json().get('status')
-    #         if status == 'COMPLETED':
-    #             download_url = status_response.json().get('url')
-    #             manage_videos_list(download_url)
-    #             break
-    #         time.sleep(60)  # Check status every minute
+    if new_headline:
+        audio_response = generate_news_audio(new_headline)
+        print(f"Generated audio for headline: {new_headline}")
+        audio_response.write_to_file('static\output.mp3')
+        audio_url = "https://streamer-ai.vercel.app/video/output.mp3"
+        video_url = "https://streamer-ai.vercel.app/video/input.mp4"
+        id = request_video_processing(audio_url, video_url)
+        while True:
+            status_response = requests.get(f'https://api.synclabs.so/video/{id}', headers={'x-api-key': API_KEY})
+            status = status_response.json().get('status')
+            if status == 'COMPLETED':
+                download_url = status_response.json().get('url')
+                manage_videos_list(download_url)
+                break
+            time.sleep(60)  # Check status every minute
 
 
 def manage_videos_list(download_url):
